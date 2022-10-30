@@ -1,0 +1,8 @@
+create table myemp as select * from scott.emp;
+declare 
+    cursor x is select sal from myemp ;
+begin
+    for i in x loop
+        DBMS_OUTPUT.PUT_LINE('The salary for this current day is: '||to_number(to_char(sysdate, 'DD'),'99')* trunc(i.sal/to_number(to_char(LAST_DAY(sysdate), 'DD'),'99'),2));
+    end loop;
+end;
